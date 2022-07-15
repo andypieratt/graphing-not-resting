@@ -29,31 +29,6 @@ const SavedBooks = () => {
   const userData = data?.me;
   const userDataLength = userData?.savedBooks.length;
 
-  // useEffect(() => {
-  //   const getUserData = async () => {
-  //     try {
-  //       const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-  //       if (!token) {
-  //         return false;
-  //       }
-
-  //       const response = await data(token);
-
-  //       if (!response.ok) {
-  //         throw new Error("something went wrong!");
-  //       }
-
-  //       const user = await response.json();
-  //       setUserData(user);
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  // };
-
-  // getUserData();
-  // }, [userDataLength]);
-
   const [removeBook, { error }] = useMutation(REMOVE_BOOK);
   if (error) {
     console.log(JSON.stringify(error));
@@ -75,15 +50,6 @@ const SavedBooks = () => {
         variables: { bookId: bookId },
       });
       console.log(data);
-
-      // if (!response.ok) {
-      //   throw new Error("something went wrong!");
-      // }
-
-      // const updatedUser = await response.json();
-      // setUserData(updatedUser);
-      // upon success, remove book's id from localStorage
-      // removeBookId(bookId);
     } catch (err) {
       console.error(err);
     }
