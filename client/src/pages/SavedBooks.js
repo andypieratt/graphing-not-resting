@@ -12,7 +12,7 @@ import {
 import { QUERY_ME } from "../utils/queries";
 import { REMOVE_BOOK } from "../utils/mutations";
 import Auth from "../utils/auth.js";
-// import { removeBookId } from "../utils/localStorage";
+import { removeBookId } from "../utils/localStorage";
 
 // const [me, { error }] = useQuery(QUERY_ME);
 // const [removeBook, { error }] = useMutation(REMOVE_BOOK);
@@ -33,6 +33,7 @@ const SavedBooks = () => {
   if (error) {
     console.log(JSON.stringify(error));
   }
+
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -49,6 +50,7 @@ const SavedBooks = () => {
       const { data } = await removeBook({
         variables: { bookId: bookId },
       });
+      removeBookId(bookId);
       console.log(data);
     } catch (err) {
       console.error(err);
